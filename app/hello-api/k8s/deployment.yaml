@@ -39,7 +39,7 @@ spec:
       containers:
       - name: hello-api
         image: hello-api:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         
         # Security Context - Container level
         securityContext:
