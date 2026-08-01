@@ -5,16 +5,12 @@ metadata:
   namespace: default
   labels:
     app: hello-api
-  annotations:
-    description: "Service for hello-api application"
 spec:
   type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30081
+    name: http
   selector:
     app: hello-api
-  ports:
-  - name: http
-    port: 80
-    targetPort: http
-    protocol: TCP
-    nodePort: 30080
-  sessionAffinity: None
