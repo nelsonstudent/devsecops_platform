@@ -9,7 +9,7 @@ spec:
   project: default
   
   source:
-    repoURL: https://github.com/seu-usuario/lab1-devsecops-platform
+    repoURL: https://github.com/nelson.student/lab1-devsecops-platform
     targetRevision: main
     path: apps/hello-api/k8s
   
