@@ -1,0 +1,31 @@
+```bash
+# Criar arquivo .gitignore na raiz
+cat > .gitignore << 'EOF'
+# Vagrant
+.vagrant/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Segurança
+*.pem
+*.key
+.env
+.env.local
+EOF
+```
