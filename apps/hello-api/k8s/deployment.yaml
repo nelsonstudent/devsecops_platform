@@ -38,7 +38,7 @@ spec:
       
       containers:
       - name: hello-api
-        image: hello-api:latest
+        image: ghcr.io/nelsonstudent/devsecops_platform/hello-api:0af8b94f39c5f41c542e3379b310548cb2797be5
         imagePullPolicy: IfNotPresent
         
         # Security Context - Container level
