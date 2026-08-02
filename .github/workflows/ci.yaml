@@ -12,6 +12,7 @@ on:
       - main
     paths:
       - 'apps/hello-api/**'
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -50,7 +51,7 @@ jobs:
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
     
- # Scan com Trivy
+    # Scan com Trivy
     - name: Run Trivy scan
       uses: aquasecurity/trivy-action@master
       with:
