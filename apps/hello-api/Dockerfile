@@ -1,24 +1,18 @@
 # Stage 1: Builder
-FROM python:3.12-slim as builder
+FROM python:3.12-alpine AS builder
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache build-base
 
 COPY requirements.txt .
 # Instala diretamente no prefixo do sistema do builder
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # Stage 2: Runtime
-FROM python:3.12-slim
+FROM python:3.12-alpine
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN addgroup -S appuser && adduser -S -G appuser appuser
 
 WORKDIR /app
 
@@ -34,8 +28,9 @@ LABEL version="1.0.0"
 ENV PYTHONUNBUFFERED=1
 ENV APP_VERSION=1.0.0
 
+# Healthcheck via Python, sem depender de curl instalado na imagem
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:5000/health || exit 1
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')" || exit 1
 
 USER appuser
 
